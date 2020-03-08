@@ -1,2 +1,2 @@
 # MNIST-Image-Recognition
-Using MNIST dataset to identify digit images.
+Achieved 99%+ accuracy on the Dataset. 
