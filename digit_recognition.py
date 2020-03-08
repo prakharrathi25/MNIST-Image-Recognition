@@ -31,9 +31,23 @@ from keras.layers import Dense, Flatten, Dropout, Conv2D, Lambda, MaxPooling2D
 from keras.preprocessing.image import ImageDataGenerator
 from keras.utils.np_utils import to_categorical
 
-# Uploading Data 
-from google.colab import files 
-files.upload()
+''' Defining important functions '''
+
+# Grayscaling and Reshaping funtion 
+def grayscale_normalize_and_reshape(data, height, width):
+    data = data / 255.0
+    data = data.reshape(-1, height, width, 1)
+    return data
+
+# Encode Decode Function 
+def encode_decode(data, encode = True):
+    if(encode = True):
+        y = to_categorical(y)
+    else:
+
+    return y   
+
+
 
 # Loading Data 
 train_data = pd.read_csv('train.csv')
@@ -53,14 +67,11 @@ X = train_data.drop(['label'], axis = 1).values
 y = train_data['label'].values
 test_X = test_data.values
 
-# Grayscale Normalization 
-X = X / 255.0
-test_X = test_X / 255.0
-
+# Grayscale Normalization and reshaping
 # Reshape the image data into 3 dimensions (height = 28pixels, width = 28px, 1)
-# because 28 x 28 = 784 
-X = X.reshape(-1, 28, 28, 1)
-test_X = test_X.reshape(-1, 28, 28, 1)
+# because 28 x 28 = 784 and Convolution works better with scaled down images
+X = grayscale_normalize_and_reshape(X, 28, 28)
+test_X = grayscale_normalize_and_reshape(test_X, 28, 28)
 
 """Encoding"""
 
@@ -70,7 +81,7 @@ print(y.shape)
 
 # Train and validation splits 
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.25, random_state=324)
-print(X_train.shape, y_train.shape, X_val.shape, y_val.shape)
+print(X_train.shape, y_train.sshape, X_val.shape, y_val.shape)
 
 # Visulaisation of the data 
 images = X_train.reshape(X_train.shape[0], 28, 28)
