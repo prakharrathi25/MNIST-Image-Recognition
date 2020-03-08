@@ -89,7 +89,7 @@ batch_size = 64
 
 # Building the CNN Model
 model = Sequential() 
-model.add(Conv2D(filters=64, kernel_size=(3,3),activation='relu', input_shape=(28,28,1)))
+model.add(Conv2D(filters=64, kernel_size=(3,3),activation='relu', input_shape=(28,28,1))) # Input Layer
 model.add(Conv2D(filters=64, kernel_size=(3,3), activation='relu'))
 
 model.add(MaxPooling2D(pool_size=(2,2))) # MaxPoolinglayer
@@ -103,6 +103,7 @@ model.add(MaxPooling2D(pool_size=(2,2)))
 model.add(Flatten())
 model.add(Dense(512,activation="relu"))
     
+# Output Layer 
 model.add(Dense(10,activation="softmax"))
     
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
@@ -116,10 +117,10 @@ datagen = ImageDataGenerator(featurewise_center=False,
                              featurewise_std_normalization=False, 
                              samplewise_std_normalization=False, 
                              zca_whitening=False,
-                             rotation_range=10, 
-                             zoom_range=0.1,
-                             width_shift_range=0.1,
-                             height_shift_range=0.1,
+                             rotation_range=15, 
+                             zoom_range=0.2,
+                             width_shift_range=0.15,
+                             height_shift_range=0.15,
                              horizontal_flip=False,
                              vertical_flip=False)
 
